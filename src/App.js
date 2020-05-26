@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route } from 'react-router-dom'
+import LandingPage from '../src/views/landingpage' 
+import Rooms from '../src/views/rooms' 
+import BookRoom from '../src/views/bookroom' 
+import RoomLedger from '../src/views/roomledger' 
+import RoomReport from '../src/views/roomreport'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/rooms" component={Rooms} />
+        <Route exact path="/bookrooms" component={BookRoom} />
+        <Route exact path="/roomledger" component={RoomLedger} />
+        <Route exact path="/roomreport" component={RoomReport} />
+      </BrowserRouter>
   );
 }
 
