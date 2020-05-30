@@ -16,29 +16,6 @@ export default class RoomReport extends Component{
 		}
     }
 
-     verifyEmpty(str){
-        if(str)
-        {
-            if(typeof str === 'string')
-            {
-                if(str.toString()===''){
-                    return '-'
-                }else{   
-                    return str
-                }
-            }if(typeof str === 'number' ){
-                if(str.toString() !== 'false'){
-                    return 'Room Available'
-                }else{   
-                    return 'Room not Available'
-                }
-            }
-        }
-        else{
-            return 'Nil'
-        }
-    }
-
     componentDidMount(){
         this.getRoomDetails()
     }
