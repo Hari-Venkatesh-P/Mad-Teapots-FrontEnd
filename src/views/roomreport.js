@@ -19,14 +19,14 @@ export default class RoomReport extends Component{
      verifyEmpty(str){
         if(str)
         {
-            if(typeof str === 'string' || typeof str === 'number' )
+            if(typeof str === 'string')
             {
                 if(str.toString()===''){
-                    return 'Nil'
+                    return '-'
                 }else{   
                     return str
                 }
-            }else{
+            }if(typeof str === 'number' ){
                 if(str.toString() !== 'false'){
                     return 'Room Available'
                 }else{   
@@ -40,22 +40,27 @@ export default class RoomReport extends Component{
     }
 
     componentDidMount(){
-    axios.get("http://localhost:4000/room/getroomdetails")
+        this.getRoomDetails()
+    }
+
+    getRoomDetails(){
+        axios.get("http://localhost:4000/room/getroomdetails")
     .then((response)=>{
       this.setState({ roomdetails:response.data.message})
     })
     .catch((error)=>{console.log(error)})
     }
 
-
     getGuestDetails(roomid,date,name){
-       if(roomid === '' || date === '' || name===''){
+       if(this.checkEmpty(date,name)){
             alert("No Guests in the selected room")
             this.setState({ guestdetails:[]})
        }else{
         axios.get("http://localhost:4000/room/getguestdetails/"+roomid+"/"+date+"/"+name+"")
         .then((response)=>{
           this.setState({ guestdetails:response.data.message})
+          console.log(response.data.message)
+          console.log(this.state.guestdetails)
         })
         .catch((error)=>{
             this.setState({ guestdetails:[]})
@@ -66,10 +71,14 @@ export default class RoomReport extends Component{
 
 
     vacateRoom(roomid,date,name){
+        if(this.checkEmpty(date,name)){
+            alert("No Guests in the selected room")
+        }else{
         axios.post("http://localhost:4000/room/vacate/"+roomid+"/"+date+"/"+name+"")
         .then((response)=>{
          if(response.data.success){
             alert(response.data.message)
+            this.getRoomDetails()
          }else{
              alert("Problems in vacating the room..!!")
              console.log(response.data.message)
@@ -78,29 +87,31 @@ export default class RoomReport extends Component{
         .catch((error)=>{
             console.log(error)
         })
+        }
     }
 
-    checkNotEmpty(roomid,date,name){
-        if(roomid === '' || date === '' || name===''){
-            return 'false'
+    checkEmpty(date,name){
+        if(date === '' || name===''){
+            return true
        }else{
-            return 'true'
+            return false
        }
     }
 
-    getRoomDetails(){
+    renderRoomDetails(){
+        console.log(this.state.roomdetails)
         return this.state.roomdetails.map(currentroom => {
             return(
                 <tr key={currentroom._id}>
                                 <td >{currentroom.roomId}</td>
-                                <td>{this.verifyEmpty(currentroom.userName)}</td>
-                                <td>{this.verifyEmpty(currentroom.inPersons)}</td>
-                                <td>{this.verifyEmpty(currentroom.availablity)}</td>
-                                <td>
+                                <td>{(currentroom.userName).toString() ==='' ? <p> - </p> : <p> {currentroom.userName} </p>}</td>
+                                <td>{(currentroom.inPersons)}</td>
+                                <td><div>{(currentroom.availablity).toString() ==='true' ? <div className="alert alert-success" role="alert"> Room available </div> : <div className="alert alert-danger" role="alert"> Room not available </div>}</div></td>
+                                <td style={{ cursor:"pointer" }}>
                                     <i className="fa fa-eye" onClick={()=>{ this.getGuestDetails(currentroom.roomId,currentroom.checkInDate,currentroom.userName) }} data-toggle="modal" data-target="#exampleModal"></i> 
-                                              <ViewGuestModal guestdetails={this.state.guestdetails}></ViewGuestModal>
+                                    <div>{(currentroom.availablity).toString() ==='true' ? <div></div> : <ViewGuestModal guestdetails={this.state.guestdetails}></ViewGuestModal>}</div>
                                 </td>
-                                <td><i className="fa fa-sign-out" onClick={()=>{ this.vacateRoom(currentroom.roomId,currentroom.checkInDate,currentroom.userName) }}></i></td>
+                                <td style={{ cursor:"pointer" }}><i className="fa fa-sign-out" onClick={()=>{ this.vacateRoom(currentroom.roomId,currentroom.checkInDate,currentroom.userName) }}></i></td>
                 </tr>   
             )
           })
@@ -125,7 +136,7 @@ export default class RoomReport extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                                {this.getRoomDetails()}
+                                {this.renderRoomDetails()}
                         </tbody>
                     </table>
                     </div>

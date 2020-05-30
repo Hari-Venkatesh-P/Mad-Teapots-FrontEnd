@@ -32,7 +32,7 @@ export default class RoomLedger extends Component{
                                 <td>{currentroomledger.mobile}</td>
                                 <td>{currentroomledger.checkInDate}</td>
                                 <td>{currentroomledger.checkOutDate}</td>
-                                <td>{currentroomledger.status}</td>
+                                <td><div>{(currentroomledger.status).toString() ==='Vacated' ? <div className="alert alert-danger" role="alert"> Room Vacated </div> : <div className="alert alert-success" role="alert"> Room Not Vacated </div>}</div></td>
                 </tr>    
             )
           })

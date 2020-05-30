@@ -66,7 +66,7 @@ function Roomcard(props){
                             <br/>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <button type="button" className="btn btn-sm  btn-outline-dark" onClick={props.viewDetails}>View Guest Details</button>
+                                    <button type="button" className="btn btn-sm  btn-outline-dark">View Guest Details</button>
                                 </div>
                                 <div className="col-md-6">
                                     <button type="button" className="btn btn-sm  btn-outline-dark">Vacate Room</button>

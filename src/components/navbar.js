@@ -35,6 +35,12 @@ export default class NavBar extends Component {
               <a className="nav-item nav-link" href="/roomledger">
                 Room Ledger
               </a>
+              <a className="nav-item nav-link" href="/receipereport">
+                Receipe Report
+              </a>
+              <a className="nav-item nav-link" href="/foodcourt">
+                Food Court
+              </a>
             </div>
           </div>
         </nav>
