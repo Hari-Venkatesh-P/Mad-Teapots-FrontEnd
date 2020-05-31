@@ -1,46 +1,83 @@
 import React, { Component } from "react";
 
 export default class NavBar extends Component {
+
+  isCookLoggedIn() {
+    return !(sessionStorage.getItem('cook') === null)
+  }
+
+  isAdminLoggedIn() {
+    return !(sessionStorage.getItem('admin') === null)
+  }
+
+  isGuestLoggedIn() {
+    return !(sessionStorage.getItem('guest') === null || sessionStorage.getItem('table_id') === null)
+  }
+
+  logOutUser(){
+    if(sessionStorage.getItem('cook')!==null)
+    {
+      sessionStorage.removeItem('cook');
+    }
+    if(sessionStorage.getItem('admin')!==null)
+    {
+      sessionStorage.removeItem('admin');
+    }
+    if(sessionStorage.getItem('guest')!==null)
+    {
+      sessionStorage.removeItem('guest');
+    }
+    if(sessionStorage.getItem('table_id')!==null)
+    {
+      sessionStorage.removeItem('table_id');
+    }
+    window.location = "/"
+  }
+
+
   render() {
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a className="navbar-brand" href="/">
-          Mad Teapots
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <a className="navbar-brand" href="#">MAD TEAPOTS</a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <a className="nav-item nav-link " href="/">
-                Home 
-              </a>
-              <a className="nav-item nav-link" href="/bookrooms">
-                Book Rooms
-              </a>
-              <a className="nav-item nav-link" href="/rooms">
-                Rooms
-              </a>
-              <a className="nav-item nav-link" href="/roomreport">
-                Room Report
-              </a>
-              <a className="nav-item nav-link" href="/roomledger">
-                Room Ledger
-              </a>
-              <a className="nav-item nav-link" href="/receipereport">
-                Receipe Report
-              </a>
-              <a className="nav-item nav-link" href="/foodcourt">
-                Food Court
-              </a>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <a className="nav-item nav-link" href="/">Home</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-item nav-link"  href="/bookrooms" >Book Rooms</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-item nav-link"  href="/rooms">Rooms</a>
+              </li>
+              <li className="nav-item"> 
+                <a className="nav-item nav-link" href="/roomreport">Room Report</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-item nav-link"  href="/roomledger" >Room Ledger</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-item nav-link" href="/receipereport">Receipe Report</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-item nav-link"  href="/foodcourt" >Food Court</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-item nav-link" href="/orders">My Orders</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-item nav-link" href="/tables">Table Report</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-item nav-link" href="/tableledger">Table Ledger</a>
+              </li>
+            </ul>
+            <div className="form-inline my-2 my-lg-0">
+              <button className="btn btn-outline-success my-2 my-sm-0"  type="submit" onClick={()=>{ this.logOutUser() }} >LOGOUT</button>
             </div>
           </div>
         </nav>

@@ -124,6 +124,7 @@ export default class Receipe extends Component{
 
 
     renderReceipeDetails(){
+        console.log(this.state.receipedetails)
             return this.state.receipedetails.map(currentreceipe => {
                 return(
                     <tr key={currentreceipe._id}>
