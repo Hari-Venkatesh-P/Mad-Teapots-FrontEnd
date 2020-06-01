@@ -42,7 +42,7 @@ function ViewGuestModal(props){
                                         <h6>First Name : </h6>
                                      </div>
                                      <div className="col-md-6">
-                                        <h6>{verifyEmpty(props.guestdetails.firstName)}</h6>
+                                        <h6>{(props.guestdetails.firstName)}</h6>
                                      </div>
                                 </div>
                                 <div className="row">
@@ -50,7 +50,7 @@ function ViewGuestModal(props){
                                         <h6>Last Name : </h6>
                                      </div>
                                      <div className="col-md-6">
-                                        <h6>{verifyEmpty(props.guestdetails.lastName)}</h6>
+                                        <h6>{(props.guestdetails.lastName)}</h6>
                                      </div>
                                 </div>
                                 <div className="row">
@@ -58,7 +58,7 @@ function ViewGuestModal(props){
                                         <h6>City : </h6>
                                      </div>
                                      <div className="col-md-6">
-                                        <h6>{verifyEmpty(props.guestdetails.city)}</h6>
+                                        <h6>{(props.guestdetails.city)}</h6>
                                      </div>
                                 </div>
                                 <div className="row">
@@ -66,7 +66,7 @@ function ViewGuestModal(props){
                                         <h6>Address : </h6>
                                      </div>
                                      <div className="col-md-6">
-                                        <h6>{verifyEmpty(props.guestdetails.address)}</h6>
+                                        <h6>{(props.guestdetails.address)}</h6>
                                      </div>
                                 </div>
                                 <div className="row">
@@ -74,7 +74,7 @@ function ViewGuestModal(props){
                                         <h6>Mobile : </h6>
                                      </div>
                                      <div className="col-md-6">
-                                        <h6>{verifyEmpty(props.guestdetails.mobile)}</h6>
+                                        <h6>{(props.guestdetails.mobile)}</h6>
                                      </div>
                                 </div>
                             </div>

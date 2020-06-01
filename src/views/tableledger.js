@@ -36,7 +36,7 @@ export default class TableLedger extends Component{
                                 <td >{currenttableledger.starttime}</td>
                                 <td><div>{(currenttableledger.endtime).toString() ==='' ? '-' : <div>{currenttableledger.endtime}</div>}</div></td>
                                 <td style={{ cursor:"pointer" }}><div>{parseInt(currenttableledger.orderItems.length) === 0 ? '-' : <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-shopping-basket" data-toggle="modal" data-target="#orderReceipeModal"></i><ViewOrderReceipeModal receipes={currenttableledger.orderItems}></ViewOrderReceipeModal> </div>}</div></td>
-                                <td >{currenttableledger.billAmount}</td>
+                                <td >{"$    "+currenttableledger.billAmount}</td>
                                 <td><div>{(currenttableledger.status).toString() ==='Pending' ? <div className="alert alert-danger" role="alert"> Payment pending </div> : <div className="alert alert-success" role="alert"> Payment Done </div>}</div></td>
                 </tr>   
             )

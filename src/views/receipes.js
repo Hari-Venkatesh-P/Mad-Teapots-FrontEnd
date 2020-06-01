@@ -128,7 +128,7 @@ export default class Receipe extends Component{
             return this.state.receipedetails.map(currentreceipe => {
                 return(
                     <tr key={currentreceipe._id}>
-                                    <td >{currentreceipe.receipeName}</td>
+                                    <th >{currentreceipe.receipeName}</th>
                                     <td>{currentreceipe.receipeOfferQuantity}</td>
                                     <td>{"$ "+currentreceipe.receipePrice}</td>
                                     <td>{(currentreceipe.receipeAvailablity).toString() ==='true' ? 'Available' : 'Not Available'}</td>

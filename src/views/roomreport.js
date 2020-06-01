@@ -37,7 +37,6 @@ export default class RoomReport extends Component{
         .then((response)=>{
           this.setState({ guestdetails:response.data.message})
           console.log(response.data.message)
-          console.log(this.state.guestdetails)
         })
         .catch((error)=>{
             this.setState({ guestdetails:[]})
@@ -80,14 +79,12 @@ export default class RoomReport extends Component{
         return this.state.roomdetails.map(currentroom => {
             return(
                 <tr key={currentroom._id}>
-                                <td >{currentroom.roomId}</td>
+                                <th >{currentroom.roomId}</th>
+                                <td >{currentroom.roomType}</td>
                                 <td>{(currentroom.userName).toString() ==='' ? <p> - </p> : <p> {currentroom.userName} </p>}</td>
                                 <td>{(currentroom.inPersons)}</td>
                                 <td><div>{(currentroom.availablity).toString() ==='true' ? <div className="alert alert-success" role="alert"> Room available </div> : <div className="alert alert-danger" role="alert"> Room not available </div>}</div></td>
-                                <td style={{ cursor:"pointer" }}>
-                                    <i className="fa fa-eye" onClick={()=>{ this.getGuestDetails(currentroom.roomId,currentroom.checkInDate,currentroom.userName) }} data-toggle="modal" data-target="#exampleModal"></i> 
-                                    <div>{(currentroom.availablity).toString() ==='true' ? <div></div> : <ViewGuestModal guestdetails={this.state.guestdetails}></ViewGuestModal>}</div>
-                                </td>
+                                <td>{(currentroom.userName).toString() === '' ? <p> - </p> :<div style={{ cursor:"pointer" }}> <i className="fa fa-eye" onClick={()=>{ this.getGuestDetails(currentroom.roomId,currentroom.checkInDate,currentroom.userName) }} data-toggle="modal" data-target="#exampleModal"></i><ViewGuestModal guestdetails={this.state.guestdetails}></ViewGuestModal></div>}</td>
                                 <td style={{ cursor:"pointer" }}><i className="fa fa-sign-out" onClick={()=>{ this.vacateRoom(currentroom.roomId,currentroom.checkInDate,currentroom.userName) }}></i></td>
                 </tr>   
             )
@@ -105,6 +102,7 @@ export default class RoomReport extends Component{
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col">Room ID</th>
+                                <th scope="col">Room Type</th>
                                 <th scope="col">Guest Name</th>
                                 <th scope="col">Total Persons</th>
                                 <th scope="col">Availablity</th>

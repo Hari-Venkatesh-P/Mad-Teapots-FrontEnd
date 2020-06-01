@@ -1,4 +1,5 @@
 import React from 'react'
+import ViewGuestModal from '../components/viewguestmodal'
 
 function verifyEmpty(str){
     if(str)
@@ -20,16 +21,16 @@ function verifyEmpty(str){
 function Roomcard(props){
         return(
             <div>
-                <div className="flip-card">
-                <div className="card" style={{width: "25rem"}}>
-                    <div className="flip-card-inner">
-                        <div className="card-header bg-dark text-light">
+                <div className="flip-card" style={{margin:"5px"}}>
+                <div className="card">
+                    <div className="flip-card-inner">  
+                        <div className={"card-header text-light " + ((props.room.userName).toString() ==='' ? 'bg-success' : 'bg-danger')}>
                             Room Number :       {props.room.roomId}
-                        </div>
+                        </div>   
                         <div className="card-body flip-card-front">
                             <div className="row">
                                 <div className="col-md-6">
-                                    <p className="card-text"><b>Guest name :</b>     </p>
+                                    <p className="card-text"><b>Guest name </b></p>
                                 </div>
                                 <div className="col-md-6">
                                     <p className="card-text">{verifyEmpty(props.room.userName)}</p>
@@ -38,7 +39,7 @@ function Roomcard(props){
                             <br/>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <p className="card-text"><b>In Persons :</b>     </p>
+                                    <p className="card-text"><b>In Persons </b>     </p>
                                 </div>
                                 <div className="col-md-6">
                                     <p className="card-text">{verifyEmpty(props.room.inPersons)}</p>
@@ -48,7 +49,7 @@ function Roomcard(props){
                         <div className="card-body flip-card-back">
                             <div className="row">
                                 <div className="col-md-6">
-                                    <p className="card-text"><b>Check In Date :</b>     </p>
+                                    <p className="card-text"><b>Check In Date </b>     </p>
                                 </div>
                                 <div className="col-md-6">
                                     <p className="card-text">{verifyEmpty(props.room.checkInDate)}</p>
@@ -57,7 +58,7 @@ function Roomcard(props){
                             <br/>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <p className="card-text"><b>Check Out Date :</b>     </p>
+                                    <p className="card-text"><b>Check Out Date </b>     </p>
                                 </div>
                                 <div className="col-md-6">
                                     <p className="card-text">{verifyEmpty(props.room.expectedCheckOutDate)}</p>
@@ -66,10 +67,10 @@ function Roomcard(props){
                             <br/>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <button type="button" className="btn btn-sm  btn-outline-dark">View Guest Details</button>
+                                    <div><button type="button" className="btn btn-sm  btn-outline-success" onClick={()=>{ props.getGuestDetails(props.room.roomId,props.room.checkInDate,props.room.userName) }} data-toggle="modal" data-target="#exampleModal">View Guest Details</button><ViewGuestModal guestdetails={props.guestdetails}></ViewGuestModal></div>
                                 </div>
                                 <div className="col-md-6">
-                                    <button type="button" className="btn btn-sm  btn-outline-dark">Vacate Room</button>
+                                    <button type="button" className="btn btn-sm btn-outline-danger" onClick={()=>{ props.vacateRoom(props.room.roomId,props.room.checkInDate,props.room.userName,props.room.roomType)}}>Vacate Room</button>
                                 </div>
                             </div>
                         </div>

@@ -123,9 +123,11 @@ export default class BookRoom extends Component {
     if(this.checkRoomCompatible(this.state.roomtype,this.state.noofpersons)){
       axios.post("http://localhost:4000/room/book",reqbody)
     .then((response)=>{
+
         //console.log(response.data.message)
         if(response.data.success){
           alert(response.data.message)
+          console.log(response.data.message)
         }else{
           alert("Issue with booking the room")
           console.log(response.data.message)

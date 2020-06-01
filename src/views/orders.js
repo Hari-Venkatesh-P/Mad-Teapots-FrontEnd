@@ -47,11 +47,14 @@ export default class Orders extends Component{
 
 
     renderOrderedReceipeCards() {
+        if(parseInt(this.state.orderDetails.length)===0){
+            alert("No Receipes Ordered..!!")
+        }else{
         var i=0;
         return this.state.orderDetails.map(currentReceipe => {
             i= i+1
           return <OrderedReceipeCards receipe={currentReceipe} index={i} key={currentReceipe._id}> </OrderedReceipeCards>
-        })
+        })}
     }
 
     getBasicDetailsFromBill(){
@@ -59,7 +62,7 @@ export default class Orders extends Component{
             <div>
                 <div style={{display:"flex",justifyContent:"flex-start" ,marginTop:"10px",marginBottom:"10px"}}>
                     <div className="alert alert-secondary" role="alert" style={{marginTop:"10px",marginBottom:"10px",marginRight:"10px"}}> <b>Guest Name :</b> {this.state.tableDetails.userName} </div>
-                    <div className="alert alert-secondary" role="alert" style={{marginTop:"10px",marginBottom:"10px",marginRight:"10px"}}> <b> Current Bill : </b> {this.state.tableDetails.billAmount} </div>
+                    <div className="alert alert-secondary" role="alert" style={{marginTop:"10px",marginBottom:"10px",marginRight:"10px"}}> <b> Current Bill : </b> {"$  "+this.state.tableDetails.billAmount} </div>
                 </div>
                 <div style={{display:"flex",justifyContent:"flex-start" ,marginTop:"10px"}}>
                     <div className="alert alert-secondary" role="alert" style={{marginTop:"5px",marginRight:"10px"}}> <b> Table Number : </b>{this.state.tableDetails.tableNumber} </div>

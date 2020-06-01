@@ -24,7 +24,7 @@ export default class RoomLedger extends Component{
         return this.state.roomledgerdetails.map(currentroomledger => {
             return(
                 <tr key={currentroomledger._id}>
-                                <td >{currentroomledger.roomId}</td>
+                                <th >{currentroomledger.roomId}</th>
                                 <td>{currentroomledger.firstName}</td>
                                 <td>{currentroomledger.lastName}</td>
                                 <td>{currentroomledger.address}</td>
