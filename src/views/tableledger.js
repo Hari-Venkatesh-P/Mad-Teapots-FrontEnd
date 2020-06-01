@@ -13,6 +13,27 @@ export default class TableLedger extends Component{
     }
 
     componentDidMount(){
+        if((sessionStorage.getItem('admin') === null)) {
+            if((sessionStorage.getItem('cook') === null)){
+                if(sessionStorage.getItem('cook')!==null)
+                {
+                    sessionStorage.removeItem('cook');
+                }
+                if(sessionStorage.getItem('admin')!==null)
+                {
+                    sessionStorage.removeItem('admin');
+                }
+                if(sessionStorage.getItem('guest')!==null)
+                {
+                    sessionStorage.removeItem('guest');
+                }
+                if(sessionStorage.getItem('table_id')!==null)
+                {
+                    sessionStorage.removeItem('table_id');
+                }
+                window.location = "/"
+            }
+          }
         this.getTableLedgerDetails()
     }
 

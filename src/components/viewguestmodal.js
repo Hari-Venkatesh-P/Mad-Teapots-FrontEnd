@@ -24,7 +24,7 @@ function verifyEmpty(str){
 }
 
 
-function ViewGuestModal(props){
+function ViewGuestModal(props,{guestdetails}){
     return(
         <div>
                 <div className="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -42,7 +42,7 @@ function ViewGuestModal(props){
                                         <h6>First Name : </h6>
                                      </div>
                                      <div className="col-md-6">
-                                        <h6>{(props.guestdetails.firstName)}</h6>
+                                        <h6>{(props.guestdetails.firstName) ==='' ? <div> {(guestdetails.firstName) ==='' ? <p> - </p> : <div>{(guestdetails.firstName)}  </div>} </div> : <div>{(props.guestdetails.firstName)}  </div>}</h6>
                                      </div>
                                 </div>
                                 <div className="row">

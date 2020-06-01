@@ -22,6 +22,21 @@ export default class Receipe extends Component{
     }
 
     componentDidMount(){
+        if(sessionStorage.getItem('cook') === null) {
+            if(sessionStorage.getItem('admin')!==null)
+            {
+                sessionStorage.removeItem('admin');
+            }
+            if(sessionStorage.getItem('guest')!==null)
+            {
+                sessionStorage.removeItem('guest');
+            }
+            if(sessionStorage.getItem('table_id')!==null)
+            {
+                sessionStorage.removeItem('table_id');
+            }
+            window.location = "/"
+          }
         this.getAllReceipes()
         }
 

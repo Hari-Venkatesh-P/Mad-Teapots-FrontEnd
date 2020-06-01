@@ -17,6 +17,21 @@ export default class RoomReport extends Component{
     }
 
     componentDidMount(){
+        if(sessionStorage.getItem('admin') === null) {
+            if(sessionStorage.getItem('cook')!==null)
+            {
+                sessionStorage.removeItem('cook');
+            }
+            if(sessionStorage.getItem('guest')!==null)
+            {
+                sessionStorage.removeItem('guest');
+            }
+            if(sessionStorage.getItem('table_id')!==null)
+            {
+                sessionStorage.removeItem('table_id');
+            }
+            window.location = "/"
+          }
         this.getRoomDetails()
     }
 
@@ -75,7 +90,6 @@ export default class RoomReport extends Component{
     }
 
     renderRoomDetails(){
-        console.log(this.state.roomdetails)
         return this.state.roomdetails.map(currentroom => {
             return(
                 <tr key={currentroom._id}>

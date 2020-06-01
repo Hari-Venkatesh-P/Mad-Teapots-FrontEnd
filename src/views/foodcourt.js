@@ -14,6 +14,17 @@ export default class FoodCourt extends Component{
     }
 
     componentDidMount(){
+        if((sessionStorage.getItem('guest') === null) || (sessionStorage.getItem('table_id') === null)) {
+            if(sessionStorage.getItem('cook')!==null)
+            {
+                sessionStorage.removeItem('cook');
+            }
+            if(sessionStorage.getItem('admin')!==null)
+            {
+                sessionStorage.removeItem('admin');
+            }
+            window.location = "/"
+          }
         this.getAllReceipes()
     }
 

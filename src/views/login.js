@@ -102,16 +102,20 @@ export default class LoginPage extends Component{
                     </form>
                 </nav>
                 <div style={{ height: "100%",width: "40%",position: "absolute",paddingTop: "20px",left: "0",backgroundColor: "lightsteelblue"}}>
-
+                    <div style={{marginLeft:"15%"}}>
+                        <h1 style={{fontFamily: "Oswald"}}>Mad Teapots</h1>
+                        <br/>
+                        <h3 style={{fontFamily: "Oswald"}}>Where food speaks with your palate..!!</h3>
+                    </div> 
                 </div>
                 <div style={{ height: "100%" ,width: "60%",position: "absolute",zIndex: "1",overflowX: "hidden",paddingTop: "20px",right: "0",backgroundColor: "lightsteelblue"}}>
                     <div className="container">
-                        <div style={{border:"double",marginTop:"15%"}}>
-                            <div style={{margin:"5%"}}>
+                    <div style={{marginLeft:"15%"}}>
+                        <h2 style={{fontFamily: "Oswald"}}>Wanna eat delicious ? </h2><br/>
+                        <h4 style={{fontFamily: "Oswald"}}>Book your table here :)</h4>
+                    </div> 
+                            <div style={{marginLeft:"15%"}}>
                             <div className="row">
-                                <div className="col-md-3">
-                                    <h6><b>Good Name :</b></h6>
-                                </div>
                                 <div className="col-md-9">
                                     <div className="form-group">
                                         <br/>
@@ -120,11 +124,7 @@ export default class LoginPage extends Component{
                                 </div>
                             </div>
                             <br/>
-                            <br/>
                             <div className="row">
-                                <div className="col-md-3">
-                                    <h6><b>Table Class :</b></h6>
-                                </div>
                                 <div className="col-md-9">
                                     <div className="form-group">
                                         <br/>
@@ -138,10 +138,8 @@ export default class LoginPage extends Component{
                                 </div>
                             </div>
                         <br/>
-                        <br/>
                         <div style={{display:"flex",justifyContent:"center"}}>
                             <button type="button" className="btn btn-dark" onClick={this.registerGuest}> Book Me a Table </button>
-                        </div>
                         </div>
                     </div>
                     </div>   

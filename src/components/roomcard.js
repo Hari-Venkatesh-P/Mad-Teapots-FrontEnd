@@ -1,24 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ViewGuestModal from '../components/viewguestmodal'
-
-function verifyEmpty(str){
-    if(str)
-    {
-        if(str.toString()==='')
-        {
-            return 'Nil'
-        }
-        else{   
-            return str
-        }
-    }
-    else{
-        return 'Nil'
-    }
-}
-
+import axios from 'axios';
 
 function Roomcard(props){
+
+    const [guestDetails, setGuestDetails] = useState([]);
+
+    function getGuestDetails(roomid,date,name){
+        if(date === '' || name ===''){
+             alert("No Guests in the selected room")
+        }else{
+         axios.get("http://localhost:4000/room/getguestdetails/"+roomid+"/"+date+"/"+name+"")
+         .then((response)=>{
+            setGuestDetails(guestDetails => [...guestDetails, response.data.message]);
+         })
+         .catch((error)=>{
+             console.log(error)
+         })
+     }
+     }
+
+     function verifyEmpty(str){
+        if(str)
+        {
+            if(str.toString()==='')
+            {
+                return 'Nil'
+            }
+            else{   
+                return str
+            }
+        }
+        else{
+            return 'Nil'
+        }
+    }
         return(
             <div>
                 <div className="flip-card" style={{margin:"5px"}}>
@@ -67,7 +83,7 @@ function Roomcard(props){
                             <br/>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <div><button type="button" className="btn btn-sm  btn-outline-success" onClick={()=>{ props.getGuestDetails(props.room.roomId,props.room.checkInDate,props.room.userName) }} data-toggle="modal" data-target="#exampleModal">View Guest Details</button><ViewGuestModal guestdetails={props.guestdetails}></ViewGuestModal></div>
+                                    <div><button type="button" className="btn btn-sm  btn-outline-success" onClick={()=>{ getGuestDetails(props.room.roomId,props.room.checkInDate,props.room.userName) }} data-toggle="modal" data-target="#exampleModal">View Guest Details</button><ViewGuestModal guestdetails={guestDetails}></ViewGuestModal></div>
                                 </div>
                                 <div className="col-md-6">
                                     <button type="button" className="btn btn-sm btn-outline-danger" onClick={()=>{ props.vacateRoom(props.room.roomId,props.room.checkInDate,props.room.userName,props.room.roomType)}}>Vacate Room</button>

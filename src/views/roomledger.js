@@ -13,6 +13,21 @@ export default class RoomLedger extends Component{
     }
 
     componentDidMount(){
+        if(sessionStorage.getItem('admin') === null) {
+            if(sessionStorage.getItem('cook')!==null)
+            {
+                sessionStorage.removeItem('cook');
+            }
+            if(sessionStorage.getItem('guest')!==null)
+            {
+                sessionStorage.removeItem('guest');
+            }
+            if(sessionStorage.getItem('table_id')!==null)
+            {
+                sessionStorage.removeItem('table_id');
+            }
+            window.location = "/"
+          }
     axios.get("http://localhost:4000/room/getroomledgerdetails")
     .then((response)=>{
       this.setState({ roomledgerdetails:response.data.message})

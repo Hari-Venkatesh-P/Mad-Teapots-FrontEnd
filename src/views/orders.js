@@ -18,6 +18,17 @@ export default class Orders extends Component{
     }
 
     componentDidMount(){
+        if((sessionStorage.getItem('guest') === null) || (sessionStorage.getItem('table_id') === null)) {
+            if(sessionStorage.getItem('cook')!==null)
+            {
+                sessionStorage.removeItem('cook');
+            }
+            if(sessionStorage.getItem('admin')!==null)
+            {
+                sessionStorage.removeItem('admin');
+            }
+            window.location = "/"
+          }
         this.getMyTable()
     }
 
@@ -47,14 +58,11 @@ export default class Orders extends Component{
 
 
     renderOrderedReceipeCards() {
-        if(parseInt(this.state.orderDetails.length)===0){
-            alert("No Receipes Ordered..!!")
-        }else{
         var i=0;
         return this.state.orderDetails.map(currentReceipe => {
             i= i+1
           return <OrderedReceipeCards receipe={currentReceipe} index={i} key={currentReceipe._id}> </OrderedReceipeCards>
-        })}
+        })
     }
 
     getBasicDetailsFromBill(){
@@ -80,7 +88,7 @@ export default class Orders extends Component{
                 <div className="container">
                    <div> {this.getBasicDetailsFromBill()} </div>
                    <br/>
-                   <div> {this.renderOrderedReceipeCards()}</div>
+                   <div>{ parseInt(this.state.orderDetails.length)=== 0 ? <h3 style={{fontFamily: "Oswald"}}>No Receipes Ordered..!!</h3> : <div> {this.renderOrderedReceipeCards()}</div>   } </div>
                 </div>
             </div>
         )
