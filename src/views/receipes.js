@@ -72,7 +72,9 @@ export default class Receipe extends Component{
             .then((response)=>{
                 if(response.data.success){
                     alert(response.data.message)
-                    this.getAllReceipes()
+                        this.getAllReceipes()
+                        //this.setState({ receipedetails: this.state.receipedetails.push(reqbody)})
+                        console.log(this.state.receipedetails)
                 }else{
                     console.log(response.data.message)
                 }
@@ -106,7 +108,9 @@ export default class Receipe extends Component{
                 .then((response)=>{
                 if(response.data.success){
                     alert(response.data.message)
-                    this.getAllReceipes()
+                    this.setState({
+                        receipedetails : this.state.receipedetails.filter(receipe => receipe._id !== id)
+                      }) 
                 }else{
                     console.log(response.data.message)
                 }
@@ -139,7 +143,6 @@ export default class Receipe extends Component{
 
 
     renderReceipeDetails(){
-        console.log(this.state.receipedetails)
             return this.state.receipedetails.map(currentreceipe => {
                 return(
                     <tr key={currentreceipe._id}>
