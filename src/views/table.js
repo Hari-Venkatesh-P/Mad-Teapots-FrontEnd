@@ -10,6 +10,7 @@ export default class Tables extends Component{
         super(props)
 		this.state = {
             tabledetails:[],
+            tableOrderItems:[],
 		}
     }
 
@@ -40,6 +41,15 @@ export default class Tables extends Component{
         axios.get("http://localhost:4000/receipe/getalltables")
         .then((response)=>{
         this.setState({ tabledetails:response.data.message})
+        })
+        .catch((error)=>{console.log(error)})
+    }
+
+    getTableReceipeDetails(id){
+        axios.get("http://localhost:4000/receipe/gettablebyid/"+id+"")
+        .then((response)=>{
+        this.setState({ tableOrderItems:response.data.message.orderItems})
+        console.log(this.state.tableOrderItems);
         })
         .catch((error)=>{console.log(error)})
     }
@@ -76,7 +86,7 @@ export default class Tables extends Component{
                                 <td><div>{(currenttable.class).toString() ==='Non Air Conditioned' ? <div className="alert alert-secondary" role="alert"> Non Air Conditioned </div> : <div className="alert alert-primary" role="alert">Air Conditioned </div>}</div></td>
                                 <td><div>{(currenttable.userName).toString() ==='' ? <div className="alert alert-success" role="alert"> Table available </div> : <div className="alert alert-danger" role="alert"> Table not available </div>}</div></td>
                                 <td>{(currenttable.userName).toString() ==='' ? <p> - </p> : <p> {currenttable.userName} </p>}</td>
-                                <td style={{ cursor:"pointer" }}><div>{parseInt(currenttable.orderItems.length) === 0 ? '-' : <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-shopping-basket" data-toggle="modal" data-target="#orderReceipeModal"></i><ViewOrderReceipeModal receipes={currenttable.orderItems}></ViewOrderReceipeModal> </div>}</div></td>
+                                <td    style={{ cursor:"pointer" }}><div>{parseInt(currenttable.orderItems.length) === 0 ? '-' : <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-shopping-basket" data-toggle="modal" data-target="#orderReceipeModal" onClick={()=>{ this.getTableReceipeDetails(currenttable._id) }} ></i> </div>}</div></td>
                                 <td>{(currenttable.userName).toString() ==='' ? <p> - </p> : <p> {currenttable.billAmount} </p>}</td>
                                 <td style={{ cursor:"pointer" }}><i className="fa fa-tags" onClick={()=>{ this.payBill(currenttable._id) }}></i></td>
                 </tr>   
@@ -104,6 +114,7 @@ export default class Tables extends Component{
                         </thead>
                         <tbody>
                                {this.renderTableDetails()}
+                               <ViewOrderReceipeModal receipes={this.state.tableOrderItems}></ViewOrderReceipeModal>
                         </tbody>
                     </table>
                     </div>

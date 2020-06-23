@@ -96,24 +96,6 @@ export default class Rooms extends Component{
          if(response.data.success){ 
             alert(response.data.message)
             window.location.reload(false);
-            /*console.log(type)
-            if((type).toString() ==='Single'){
-                this.getSingleRooms()
-            }else if((type).toString() ==='Twin'){
-                axios.get("http://localhost:4000/room/getallroomsontype/Twin")
-                .then((response)=>{
-                if(response.data.success){
-                    this.setState({ twinorooms:response.data.message})
-                }else{
-                    console.log(response.data.message)
-                }
-                })
-                .catch((error)=>{console.log(error)})
-            }else if((type).toString() ==='Trio'){
-                this.triorooms()
-            }else if((type).toString() ==='Quad'){
-                this.getQuadRooms()
-            }*/
          }else{
              alert("Problems in vacating the room..!!")
              console.log(response.data.message)

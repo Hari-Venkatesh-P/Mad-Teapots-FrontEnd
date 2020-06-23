@@ -12,6 +12,7 @@ function Roomcard(props){
         }else{
          axios.get("http://localhost:4000/room/getguestdetails/"+roomid+"/"+date+"/"+name+"")
          .then((response)=>{
+             console.log(response)
             setGuestDetails(guestDetails => [...guestDetails, response.data.message]);
          })
          .catch((error)=>{

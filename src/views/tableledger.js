@@ -9,6 +9,7 @@ export default class TableLedger extends Component{
         super(props)
 		this.state = {
             tableledgerdetails:[],
+            tableorderitems:[]
 		}
     }
 
@@ -45,6 +46,14 @@ export default class TableLedger extends Component{
         .catch((error)=>{console.log(error)})
     }
 
+    getTableLedgerDetailsById(id){
+        axios.get("http://localhost:4000/receipe/getbillledgerbyid/"+id+"")
+        .then((response)=>{
+        this.setState({ tableorderitems:response.data.message.orderItems})
+        })
+        .catch((error)=>{console.log(error)})
+    }
+
 
     renderTableLedgerDetails(){
         return this.state.tableledgerdetails.map(currenttableledger => {
@@ -56,7 +65,7 @@ export default class TableLedger extends Component{
                                 <td >{currenttableledger.userName}</td>
                                 <td >{currenttableledger.starttime}</td>
                                 <td><div>{(currenttableledger.endtime).toString() ==='' ? '-' : <div>{currenttableledger.endtime}</div>}</div></td>
-                                <td style={{ cursor:"pointer" }}><div>{parseInt(currenttableledger.orderItems.length) === 0 ? '-' : <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-shopping-basket" data-toggle="modal" data-target="#orderReceipeModal"></i><ViewOrderReceipeModal receipes={currenttableledger.orderItems}></ViewOrderReceipeModal> </div>}</div></td>
+                                <td style={{ cursor:"pointer" }}><div>{parseInt(currenttableledger.orderItems.length) === 0 ? '-' : <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-shopping-basket" data-toggle="modal" data-target="#orderReceipeModal" onClick={()=>{ this.getTableLedgerDetailsById(currenttableledger._id) }}></i> </div>}</div></td>
                                 <td >{"$    "+currenttableledger.billAmount}</td>
                                 <td><div>{(currenttableledger.status).toString() ==='Pending' ? <div className="alert alert-danger" role="alert"> Payment pending </div> : <div className="alert alert-success" role="alert"> Payment Done </div>}</div></td>
                 </tr>   
@@ -86,6 +95,7 @@ export default class TableLedger extends Component{
                         </thead>
                         <tbody>
                                 {this.renderTableLedgerDetails()}
+                                <ViewOrderReceipeModal receipes={this.state.tableorderitems}></ViewOrderReceipeModal>
                         </tbody>
                     </table>
                     </div>
