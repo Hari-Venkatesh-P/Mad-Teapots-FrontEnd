@@ -2,6 +2,8 @@
 import React, { Component } from 'react'
 import NavBar from '../components/navbar'
 
+import '../styles/views.css'
+
 import axios from 'axios';
 
 export default class FoodCourt extends Component{
@@ -14,17 +16,7 @@ export default class FoodCourt extends Component{
     }
 
     componentDidMount(){
-        if((sessionStorage.getItem('guest') === null) || (sessionStorage.getItem('table_id') === null)) {
-            if(sessionStorage.getItem('cook')!==null)
-            {
-                sessionStorage.removeItem('cook');
-            }
-            if(sessionStorage.getItem('admin')!==null)
-            {
-                sessionStorage.removeItem('admin');
-            }
-            window.location = "/"
-          }
+        
         this.getAllReceipes()
     }
 
@@ -70,9 +62,9 @@ export default class FoodCourt extends Component{
         return this.state.receipedetails.map(currentreceipe => {
             return(
                 <tr key={currentreceipe._id}>
-                                <td >{currentreceipe.receipeName}</td>
-                                <td>{currentreceipe.receipeOfferQuantity}</td>
-                                <td>{"$ "+ currentreceipe.receipePrice}</td>
+                                <td className="display">{currentreceipe.receipeName}</td>
+                                <td className="display">{currentreceipe.receipeOfferQuantity}</td>
+                                <td className="display">{"$ "+ currentreceipe.receipePrice}</td>
                                 <td style={{ cursor:"pointer" }}><i className="fa fa-shopping-cart" onClick={()=>{ this.addReceipeToMyBill(currentreceipe.receipeName) }}></i></td>
                 </tr>   
             )
@@ -83,7 +75,10 @@ export default class FoodCourt extends Component{
         return(
             <div>
                 <NavBar/>
-                <div className="container" style={{marginTop : "40px"}}>
+                <div className="container" style={{marginTop : "1%"}}>
+                <div style={{display:"flex",justifyContent:"flexStart"}}>
+                    <h3 style={{fontFamily: "Oswald",color:"#293d3d"}}>Currently Available in Food Court :</h3>
+                </div>
                     <div className="table-responsive">
                         <table className="table table-hover">
                             <thead className="thead-dark">

@@ -1,5 +1,6 @@
 import React from 'react'
 
+import "../styles/views.css"
 
 function AddReceipeModal(props){
     return(
@@ -8,7 +9,7 @@ function AddReceipeModal(props){
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="addReceipeModal">Receipe Details : </h5>
+                                <h5 className="modal-title display" id="addReceipeModal">Receipe Details : </h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
@@ -16,7 +17,7 @@ function AddReceipeModal(props){
                             <div className="modal-body">
                             <div className="row">
                                 <div className="col-md-6">
-		                            <h6>Receipe Name : </h6>
+		                            <h6 className="display">Receipe Name : </h6>
                                 </div>
                                 <div className="col-md-6">
                                     <br/>
@@ -27,7 +28,7 @@ function AddReceipeModal(props){
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
-		                            <h6>Receipe Quantity : </h6>
+		                            <h6 className="display">Receipe Quantity : </h6>
                                 </div>
                                 <div className="col-md-6">
                                     <br/>
@@ -38,7 +39,7 @@ function AddReceipeModal(props){
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
-		                            <h6>Receipe Price : </h6>
+		                            <h6 className="display">Receipe Price : </h6>
                                 </div>
                                 <div className="col-md-6">
                                     <br/>

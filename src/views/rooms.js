@@ -13,26 +13,18 @@ export default class Rooms extends Component{
             twinorooms:[],
             triorooms:[],
             quadrooms:[],
-            guestdetails : [] 
+            guestdetails : {
+                firstName: "",
+                lastName: "",
+                city: "",
+                address: "",
+                mobile: ""
+            },
+            displayModal : true, 
 		}
     }
     
     componentDidMount(){
-        if(sessionStorage.getItem('admin') === null) {
-            if(sessionStorage.getItem('cook')!==null)
-            {
-                sessionStorage.removeItem('cook');
-            }
-            if(sessionStorage.getItem('guest')!==null)
-            {
-                sessionStorage.removeItem('guest');
-            }
-            if(sessionStorage.getItem('table_id')!==null)
-            {
-                sessionStorage.removeItem('table_id');
-            }
-            window.location = "/"
-          }
         this.getSingleRooms()
         this.getTwinRooms()
         this.getTrioRooms()
@@ -56,6 +48,7 @@ export default class Rooms extends Component{
         .then((response)=>{
         if(response.data.success){
             this.setState({ twinorooms:response.data.message})
+            console.log(this.state.twinorooms)
         }else{
             console.log(response.data.message)
         }
@@ -68,6 +61,7 @@ export default class Rooms extends Component{
         .then((response)=>{
         if(response.data.success){
             this.setState({ triorooms:response.data.message})
+            console.log(this.state.triorooms)
         }else{
             console.log(response.data.message)
         }
@@ -107,14 +101,16 @@ export default class Rooms extends Component{
         }
     }
 
-    getGuestDetails(roomid,date,name){
+    getGuestDetails = (roomid,date,name) => {
         if(date === '' || name ===''){
+            this.setState({ displayModal:false})
              alert("No Guests in the selected room")
+             window.location.reload(false)
         }else{
          axios.get("http://localhost:4000/room/getguestdetails/"+roomid+"/"+date+"/"+name+"")
          .then((response)=>{
-           this.setState({ guestdetails:response.data.message})
-           console.log(response.data.message)
+             this.setState({ displayModal:true})
+             this.setState({ guestdetails:response.data.message})
          })
          .catch((error)=>{
              console.log(error)
@@ -124,25 +120,25 @@ export default class Rooms extends Component{
     
     renderSingleRooms() {
           return this.state.singlerooms.map(currentsingleroom => {
-            return <RoomCard room={currentsingleroom}  getGuestDetails={this.getGuestDetails} guestdetails = {this.state.guestdetails} vacateRoom={this.vacateRoom} key={currentsingleroom._id}/>;
+            return <RoomCard room={currentsingleroom}  getGuestDetails={this.getGuestDetails}  vacateRoom={this.vacateRoom} key={currentsingleroom._id}/>;
           })
       }
 
     renderTwinoRooms() {
         return this.state.twinorooms.map(currenttwinoroom => {
-          return <RoomCard room={currenttwinoroom}  getGuestDetails={this.getGuestDetails} guestdetails = {this.state.guestdetails} vacateRoom={this.vacateRoom} key={currenttwinoroom._id}/>;
+          return <RoomCard room={currenttwinoroom}  getGuestDetails={this.getGuestDetails}  vacateRoom={this.vacateRoom} key={currenttwinoroom._id}/>;
         })
     }
 
     renderTrioRooms() {
         return this.state.triorooms.map(currenttrioroom => {
-          return <RoomCard room={currenttrioroom}  getGuestDetails={this.getGuestDetails} guestdetails = {this.state.guestdetails} vacateRoom={this.vacateRoom} key={currenttrioroom._id} />;
+          return <RoomCard room={currenttrioroom}  getGuestDetails={this.getGuestDetails}  vacateRoom={this.vacateRoom} key={currenttrioroom._id} />;
         })
     }
 
     renderQuadRooms(){
         return this.state.quadrooms.map(currentquadroom => {
-            return <RoomCard room={currentquadroom}  getGuestDetails={this.getGuestDetails} guestdetails = {this.state.guestdetails} vacateRoom={this.vacateRoom} key={currentquadroom._id}/>;
+            return <RoomCard room={currentquadroom}  getGuestDetails={this.getGuestDetails}  vacateRoom={this.vacateRoom} key={currentquadroom._id}/>;
         })
     }
 
@@ -194,6 +190,9 @@ export default class Rooms extends Component{
                         </div>
                     </div>
                 </div>
+                {(this.state.displayModal) &&
+                    <ViewGuestModal guestdetails={this.state.guestdetails}></ViewGuestModal>
+                }
             </div>
         )
     }

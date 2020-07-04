@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import './App.css';
-import { BrowserRouter, Route ,Redirect   } from 'react-router-dom';
+import { BrowserRouter, Route   } from 'react-router-dom';
 
 
 import Rooms from '../src/views/rooms'; 
@@ -13,35 +13,17 @@ import LoginPage from '../src/views/login';
 import Orders from "../src/views/orders";
 import Tables from "./views/table";
 import TableLedger from "./views/tableledger";
+import { AdminProtectedRoute, GuestProtectedRoute, CookProtectedRoute , AdminAndCookSharedProtectedRoute } from '../src/authentication/protectedroute'
 
-
-import requireAdminAuth from './authentication/adminauthguard';
-import requireGuestAuth from './authentication/guestauthguard';
-import requireCookAuth from './authentication/cookauthguard';
 
 class App extends Component {
-
-  state = {
-    auth: true,
-   }
-
-
-   componentDidMount() {
-
-    if (sessionStorage.getItem('admin') === null || sessionStorage.getItem('cook') === null ) {
-      
-      this.setState({auth:false});
-    }
-   }
-
-
 
 
   render() {
     return (
       <BrowserRouter>
       <Route exact path="/" component={LoginPage} />
-      <Route exact path="/rooms" component={Rooms} />
+      {/* <Route exact path="/rooms" component={Rooms} />
       <Route exact path="/bookrooms" component={BookRoom} />
       <Route exact path="/roomledger" component={RoomLedger} />
       <Route exact path="/roomreport" component={RoomReport} />
@@ -49,7 +31,22 @@ class App extends Component {
       <Route exact path="/foodcourt" component={FoodCourt} />
       <Route exact path="/orders" component={Orders} />
       <Route exact path="/tables" component={Tables} />
-      <Route exact path="/tableledger" component={TableLedger} />
+      
+      <Route exact path="/tableledger" component={TableLedger} /> */}
+
+      <GuestProtectedRoute path="/orders" exact component={Orders}></GuestProtectedRoute>
+      <GuestProtectedRoute path="/foodcourt" exact component={FoodCourt}></GuestProtectedRoute>
+
+
+      <AdminAndCookSharedProtectedRoute path="/receipereport" exact component={Receipe}></AdminAndCookSharedProtectedRoute>
+      <AdminAndCookSharedProtectedRoute path="/tables" exact component={Tables}></AdminAndCookSharedProtectedRoute>
+
+
+      <AdminProtectedRoute path="/tableledger" exact component={TableLedger}></AdminProtectedRoute>
+      <AdminProtectedRoute path="/roomledger" exact component={RoomLedger}></AdminProtectedRoute>
+      <AdminProtectedRoute path="/rooms" exact component={Rooms}></AdminProtectedRoute>
+      <AdminProtectedRoute path="/roomreport" exact component={RoomReport}></AdminProtectedRoute>
+      <AdminProtectedRoute path="/bookrooms" exact component={BookRoom}></AdminProtectedRoute>
       </BrowserRouter>);
   }
 }

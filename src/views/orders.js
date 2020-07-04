@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NavBar from '../components/navbar'
 
 import axios from 'axios';
-
+import '../styles/views.css'
 import OrderedReceipeCards from '../components/orderedreceipecard'
 
 
@@ -18,17 +18,6 @@ export default class Orders extends Component{
     }
 
     componentDidMount(){
-        if((sessionStorage.getItem('guest') === null) || (sessionStorage.getItem('table_id') === null)) {
-            if(sessionStorage.getItem('cook')!==null)
-            {
-                sessionStorage.removeItem('cook');
-            }
-            if(sessionStorage.getItem('admin')!==null)
-            {
-                sessionStorage.removeItem('admin');
-            }
-            window.location = "/"
-          }
         this.getMyTable()
     }
 
@@ -69,12 +58,12 @@ export default class Orders extends Component{
         return (
             <div>
                 <div style={{display:"flex",justifyContent:"flex-start" ,marginTop:"10px",marginBottom:"10px"}}>
-                    <div className="alert alert-secondary" role="alert" style={{marginTop:"10px",marginBottom:"10px",marginRight:"10px"}}> <b>Guest Name :</b> {this.state.tableDetails.userName} </div>
-                    <div className="alert alert-secondary" role="alert" style={{marginTop:"10px",marginBottom:"10px",marginRight:"10px"}}> <b> Current Bill : </b> {"$  "+this.state.tableDetails.billAmount} </div>
+                    <div className="alert alert-secondary display" role="alert" style={{marginTop:"10px",marginBottom:"10px",marginRight:"10px"}}> <b>Guest Name :</b> {this.state.tableDetails.userName} </div>
+                    <div className="alert alert-secondary display" role="alert" style={{marginTop:"10px",marginBottom:"10px",marginRight:"10px"}}> <b> Current Bill : </b> {"$  "+this.state.tableDetails.billAmount} </div>
                 </div>
                 <div style={{display:"flex",justifyContent:"flex-start" ,marginTop:"10px"}}>
-                    <div className="alert alert-secondary" role="alert" style={{marginTop:"5px",marginRight:"10px"}}> <b> Table Number : </b>{this.state.tableDetails.tableNumber} </div>
-                    <div className="alert alert-secondary" role="alert" style={{marginTop:"5px",marginRight:"10px"}}> <b>Table Class : </b>{this.state.tableDetails.class} </div>
+                    <div className="alert alert-secondary display" role="alert" style={{marginTop:"5px",marginRight:"10px"}}> <b> Table Number : </b>{this.state.tableDetails.tableNumber} </div>
+                    <div className="alert alert-secondary display" role="alert" style={{marginTop:"5px",marginRight:"10px"}}> <b>Table Class : </b>{this.state.tableDetails.class} </div>
                 </div>
             </div>
             )
@@ -87,7 +76,6 @@ export default class Orders extends Component{
                 <NavBar/>
                 <div className="container">
                    <div> {this.getBasicDetailsFromBill()} </div>
-                   <br/>
                    <div>{ parseInt(this.state.orderDetails.length)=== 0 ? <h3 style={{fontFamily: "Oswald"}}>No Receipes Ordered..!!</h3> : <div> {this.renderOrderedReceipeCards()}</div>   } </div>
                 </div>
             </div>

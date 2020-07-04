@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NavBar from '../components/navbar'
 import ViewOrderReceipeModal from '../components/vieworderreceipesmodal'
 import axios from 'axios';
+import '../styles/views.css'
 
 export default class TableLedger extends Component{
 
@@ -14,27 +15,6 @@ export default class TableLedger extends Component{
     }
 
     componentDidMount(){
-        if((sessionStorage.getItem('admin') === null)) {
-            if((sessionStorage.getItem('cook') === null)){
-                if(sessionStorage.getItem('cook')!==null)
-                {
-                    sessionStorage.removeItem('cook');
-                }
-                if(sessionStorage.getItem('admin')!==null)
-                {
-                    sessionStorage.removeItem('admin');
-                }
-                if(sessionStorage.getItem('guest')!==null)
-                {
-                    sessionStorage.removeItem('guest');
-                }
-                if(sessionStorage.getItem('table_id')!==null)
-                {
-                    sessionStorage.removeItem('table_id');
-                }
-                window.location = "/"
-            }
-          }
         this.getTableLedgerDetails()
     }
 
@@ -59,15 +39,15 @@ export default class TableLedger extends Component{
         return this.state.tableledgerdetails.map(currenttableledger => {
             return(
                 <tr key={currenttableledger._id}>
-                                <th >{currenttableledger.tableNumber}</th>
-                                <td >{currenttableledger.class}</td>
-                                <td >{currenttableledger.date}</td>
-                                <td >{currenttableledger.userName}</td>
-                                <td >{currenttableledger.starttime}</td>
-                                <td><div>{(currenttableledger.endtime).toString() ==='' ? '-' : <div>{currenttableledger.endtime}</div>}</div></td>
-                                <td style={{ cursor:"pointer" }}><div>{parseInt(currenttableledger.orderItems.length) === 0 ? '-' : <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-shopping-basket" data-toggle="modal" data-target="#orderReceipeModal" onClick={()=>{ this.getTableLedgerDetailsById(currenttableledger._id) }}></i> </div>}</div></td>
-                                <td >{"$    "+currenttableledger.billAmount}</td>
-                                <td><div>{(currenttableledger.status).toString() ==='Pending' ? <div className="alert alert-danger" role="alert"> Payment pending </div> : <div className="alert alert-success" role="alert"> Payment Done </div>}</div></td>
+                                <th className="display">{currenttableledger.tableNumber}</th>
+                                <td className="display">{currenttableledger.class}</td>
+                                <td className="display">{currenttableledger.date}</td>
+                                <td className="display">{currenttableledger.userName}</td>
+                                <td className="display">{currenttableledger.starttime}</td>
+                                <td className="display"><div>{(currenttableledger.endtime).toString() ==='' ? '-' : <div>{currenttableledger.endtime}</div>}</div></td>
+                                <td className="display" style={{ cursor:"pointer" }}><div>{parseInt(currenttableledger.orderItems.length) === 0 ? '-' : <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-shopping-basket" data-toggle="modal" data-target="#orderReceipeModal" onClick={()=>{ this.getTableLedgerDetailsById(currenttableledger._id) }}></i> </div>}</div></td>
+                                <td className="display">{"$    "+currenttableledger.billAmount}</td>
+                                <td className="display"><div>{(currenttableledger.status).toString() ==='Pending' ? <div className="alert alert-danger" role="alert"> Payment pending </div> : <div className="alert alert-success" role="alert"> Payment Done </div>}</div></td>
                 </tr>   
             )
           })
@@ -77,7 +57,10 @@ export default class TableLedger extends Component{
         return(
             <div>
                 <NavBar/>
-                <div className="container" style={{padding : "50px"}}>
+                <div className="container" style={{padding : "1%"}}>
+                <div style={{display:"flex",justifyContent:"flexStart"}}>
+                    <h3 style={{fontFamily: "Oswald",color:"#293d3d"}}>Table Ledger Details : </h3>
+                </div>
                     <div className="table-responsive">
                     <table className="table table-hover">
                         <thead className="thead-dark">

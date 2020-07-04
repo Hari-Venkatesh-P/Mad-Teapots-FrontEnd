@@ -138,7 +138,7 @@ export default class LoginPage extends Component{
                                 </div>
                             </div>
                         <br/>
-                        <div style={{display:"flex",justifyContent:"center"}}>
+                        <div style={{display:"flex",justifyContent:"flexStart"}}>
                             <button type="button" className="btn btn-dark" onClick={this.registerGuest}> Book Me a Table </button>
                         </div>
                     </div>

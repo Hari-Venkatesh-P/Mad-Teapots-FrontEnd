@@ -86,7 +86,7 @@ export default class NavBar extends Component {
                 <a className="nav-item nav-link" href="/tables">Table Report</a>
               </li>
               }
-              {(this.isCookLoggedIn() || this.isAdminLoggedIn())  &&
+              {(this.isAdminLoggedIn())  &&
               <li className="nav-item">
                 <a className="nav-item nav-link" href="/tableledger">Table Ledger</a>
               </li>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NavBar from '../components/navbar'
 
 import axios from 'axios';
+import '../styles/views.css'
 
 import ViewGuestModal from '../components/viewguestmodal'
 
@@ -17,21 +18,6 @@ export default class RoomReport extends Component{
     }
 
     componentDidMount(){
-        if(sessionStorage.getItem('admin') === null) {
-            if(sessionStorage.getItem('cook')!==null)
-            {
-                sessionStorage.removeItem('cook');
-            }
-            if(sessionStorage.getItem('guest')!==null)
-            {
-                sessionStorage.removeItem('guest');
-            }
-            if(sessionStorage.getItem('table_id')!==null)
-            {
-                sessionStorage.removeItem('table_id');
-            }
-            window.location = "/"
-          }
         this.getRoomDetails()
     }
 
@@ -93,13 +79,13 @@ export default class RoomReport extends Component{
         return this.state.roomdetails.map(currentroom => {
             return(
                 <tr key={currentroom._id}>
-                                <th >{currentroom.roomId}</th>
-                                <td >{currentroom.roomType}</td>
-                                <td>{(currentroom.userName).toString() ==='' ? <p> - </p> : <p> {currentroom.userName} </p>}</td>
-                                <td>{(currentroom.inPersons)}</td>
-                                <td><div>{(currentroom.availablity).toString() ==='true' ? <div className="alert alert-success" role="alert"> Room available </div> : <div className="alert alert-danger" role="alert"> Room not available </div>}</div></td>
-                                <td>{(currentroom.userName).toString() === '' ? <p> - </p> :<div style={{ cursor:"pointer" }}> <i className="fa fa-eye" onClick={()=>{ this.getGuestDetails(currentroom.roomId,currentroom.checkInDate,currentroom.userName) }} data-toggle="modal" data-target="#exampleModal"></i><ViewGuestModal guestdetails={this.state.guestdetails}></ViewGuestModal></div>}</td>
-                                <td style={{ cursor:"pointer" }}><i className="fa fa-sign-out" onClick={()=>{ this.vacateRoom(currentroom.roomId,currentroom.checkInDate,currentroom.userName) }}></i></td>
+                                <th className="display">{currentroom.roomId}</th>
+                                <td className="display">{currentroom.roomType}</td>
+                                <td className="display">{(currentroom.userName).toString() ==='' ? <p> - </p> : <p> {currentroom.userName} </p>}</td>
+                                <td className="display">{(currentroom.inPersons)}</td>
+                                <td className="display"><div>{(currentroom.availablity).toString() ==='true' ? <div className="alert alert-success" role="alert"> Room available </div> : <div className="alert alert-danger" role="alert"> Room not available </div>}</div></td>
+                                <td className="display">{(currentroom.userName).toString() === '' ? <p> - </p> :<div style={{ cursor:"pointer" }}> <i className="fa fa-eye" onClick={()=>{ this.getGuestDetails(currentroom.roomId,currentroom.checkInDate,currentroom.userName) }} data-toggle="modal" data-target="#exampleModal"></i><ViewGuestModal guestdetails={this.state.guestdetails}></ViewGuestModal></div>}</td>
+                                <td className="display" style={{ cursor:"pointer" }}><i className="fa fa-sign-out" onClick={()=>{ this.vacateRoom(currentroom.roomId,currentroom.checkInDate,currentroom.userName) }}></i></td>
                 </tr>   
             )
           })
@@ -110,7 +96,10 @@ export default class RoomReport extends Component{
         return(
             <div>
                 <NavBar/>
-                <div className="container" style={{padding : "50px"}}>
+                <div className="container" style={{padding : "1%"}}>
+                <div style={{display:"flex",justifyContent:"flexStart"}}>
+                    <h3 style={{fontFamily: "Oswald",color:"#293d3d"}}>Room Current Details : </h3>
+                </div>
                     <div className="table-responsive">
                     <table className="table table-hover">
                         <thead className="thead-dark">

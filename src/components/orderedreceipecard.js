@@ -1,6 +1,5 @@
 import React from 'react'
-
-
+import "../styles/views.css"
 function OrderedReceipeCards(props){
 
     return(
@@ -10,30 +9,30 @@ function OrderedReceipeCards(props){
                     <div className="card-body bg-light mb-3">
                         <div className="row">
                             <div className="col-md-3">
-                                <h6 className="card-text" ><b>Name : </b></h6>
+                                <h6 className="card-text display" ><b>Name : </b></h6>
                             </div>
                             <div className="col-md-3">
-                                <h6 className="card-text">{props.receipe.receipeName}</h6>
+                                <h6 className="card-text display">{props.receipe.receipeName}</h6>
                             </div>
                             <div className="col-md-3">
-                                <h6 className="card-text"><b>Quantity : </b></h6>
+                                <h6 className="card-text display"><b>Quantity : </b></h6>
                             </div>
                             <div className="col-md-3">
-                                <h6 className="card-text" >{props.receipe.receipeCount}</h6>
+                                <h6 className="card-text display" >{props.receipe.receipeCount}</h6>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-3">
-                                <h6 className="card-text"><b>Price : </b></h6>
+                                <h6 className="card-text display"><b>Price : </b></h6>
                             </div>
                             <div className="col-md-3">
-                                <h6 className="card-text">{"$  " +props.receipe.receipePrice}</h6>
+                                <h6 className="card-text display">{"$  " +props.receipe.receipePrice}</h6>
                             </div>
                             <div className="col-md-3">
-                                <h6 className="card-text"><b>Total Price : </b></h6>
+                                <h6 className="card-text display"><b>Total Price : </b></h6>
                             </div>
                             <div className="col-md-3">
-                                <h6 className="card-text">{"$  " +((props.receipe.receipePrice)*(props.receipe.receipeCount))}</h6>
+                                <h6 className="card-text display">{"$  " +((props.receipe.receipePrice)*(props.receipe.receipeCount))}</h6>
                             </div>
                         </div>
                     </div>

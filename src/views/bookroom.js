@@ -36,18 +36,6 @@ export default class BookRoom extends Component {
 
   componentDidMount(){
     if(sessionStorage.getItem('admin') === null) {
-            if(sessionStorage.getItem('cook')!==null)
-            {
-                sessionStorage.removeItem('cook');
-            }
-            if(sessionStorage.getItem('guest')!==null)
-            {
-                sessionStorage.removeItem('guest');
-            }
-            if(sessionStorage.getItem('table_id')!==null)
-            {
-                sessionStorage.removeItem('table_id');
-            }
       window.location = "/"
     }
   }
@@ -138,12 +126,9 @@ export default class BookRoom extends Component {
       checkindate : this.state.checkindate,
       expectedCheckOutDate : this.state.checkoutdate,
     }
-    console.log(reqbody)
     if(this.checkRoomCompatible(this.state.roomtype,this.state.noofpersons)){
       axios.post("http://localhost:4000/room/book",reqbody)
     .then((response)=>{
-
-        //console.log(response.data.message)
         if(response.data.success){
           alert(response.data.message)
           console.log(response.data.message)
@@ -164,8 +149,11 @@ export default class BookRoom extends Component {
     return (
       <div>
         <NavBar />
-        <div style={{paddingTop: "2%"}}>
+        <div style={{paddingTop: "1%"}}>
         <div className="container">
+          <div style={{display:"flex",justifyContent:"flexStart"}}>
+              <h3 style={{fontFamily: "Oswald",color:"#293d3d"}}>Book Room : </h3>
+          </div>
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NavBar from '../components/navbar'
 
 import axios from 'axios';
+import '../styles/views.css'
 
 export default class RoomLedger extends Component{
 
@@ -13,21 +14,6 @@ export default class RoomLedger extends Component{
     }
 
     componentDidMount(){
-        if(sessionStorage.getItem('admin') === null) {
-            if(sessionStorage.getItem('cook')!==null)
-            {
-                sessionStorage.removeItem('cook');
-            }
-            if(sessionStorage.getItem('guest')!==null)
-            {
-                sessionStorage.removeItem('guest');
-            }
-            if(sessionStorage.getItem('table_id')!==null)
-            {
-                sessionStorage.removeItem('table_id');
-            }
-            window.location = "/"
-          }
     axios.get("http://localhost:4000/room/getroomledgerdetails")
     .then((response)=>{
       this.setState({ roomledgerdetails:response.data.message})
@@ -39,15 +25,15 @@ export default class RoomLedger extends Component{
         return this.state.roomledgerdetails.map(currentroomledger => {
             return(
                 <tr key={currentroomledger._id}>
-                                <th >{currentroomledger.roomId}</th>
-                                <td>{currentroomledger.firstName}</td>
-                                <td>{currentroomledger.lastName}</td>
-                                <td>{currentroomledger.address}</td>
-                                <td>{currentroomledger.city}</td>
-                                <td>{currentroomledger.mobile}</td>
-                                <td>{currentroomledger.checkInDate}</td>
-                                <td>{currentroomledger.checkOutDate}</td>
-                                <td><div>{(currentroomledger.status).toString() ==='Vacated' ? <div className="alert alert-danger" role="alert"> Room Vacated </div> : <div className="alert alert-success" role="alert"> Room Not Vacated </div>}</div></td>
+                                <th className="display">{currentroomledger.roomId}</th>
+                                <td  className="display"> {currentroomledger.firstName}</td>
+                                <td  className="display">{currentroomledger.lastName}</td>
+                                <td className="display">{currentroomledger.address}</td>
+                                <td className="display">{currentroomledger.city}</td>
+                                <td className="display">{currentroomledger.mobile}</td>
+                                <td className="display">{currentroomledger.checkInDate}</td>
+                                <td className="display">{currentroomledger.checkOutDate}</td>
+                                <td className="display"><div>{(currentroomledger.status).toString() ==='Vacated' ? <div className="alert alert-danger" role="alert"> Room Vacated </div> : <div className="alert alert-success" role="alert"> Room Not Vacated </div>}</div></td>
                 </tr>    
             )
           })
@@ -57,7 +43,10 @@ export default class RoomLedger extends Component{
         return(
             <div>
                 <NavBar/>
-                <div className="container" style={{padding : "50px"}}>
+                <div className="container" style={{padding : "1%"}}>
+                <div style={{display:"flex",justifyContent:"flexStart"}}>
+                    <h3 style={{fontFamily: "Oswald",color:"#293d3d"}}>Room Ledger Details : </h3>
+                </div>
                     <div className="table-responsive">
                     <table className="table table-hover">
                         <thead className="thead-dark">
