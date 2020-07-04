@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { Component } from 'react'
 import NavBar from '../components/navbar'
 
@@ -21,7 +20,7 @@ export default class FoodCourt extends Component{
     }
 
     getAllReceipes(){
-        axios.get("http://localhost:4000/receipe/getallavailablereceipes")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/receipe/getallavailablereceipes")
         .then((response)=>{
             if(response.data.success){
                 this.setState({ receipedetails:response.data.message})
@@ -46,7 +45,7 @@ export default class FoodCourt extends Component{
                     _id : _id
             }
             console.log(reqbody)
-            axios.post("http://localhost:4000/receipe/addreceipetobill",reqbody)
+            axios.post("https://hari-mad-teapots-backend.herokuapp.com/receipe/addreceipetobill",reqbody)
             .then((response)=>{
             if(response.data.success){
                 alert(response.data.message)

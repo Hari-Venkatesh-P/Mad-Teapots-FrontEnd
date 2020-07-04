@@ -127,7 +127,7 @@ export default class BookRoom extends Component {
       expectedCheckOutDate : this.state.checkoutdate,
     }
     if(this.checkRoomCompatible(this.state.roomtype,this.state.noofpersons)){
-      axios.post("http://localhost:4000/room/book",reqbody)
+      axios.post("https://hari-mad-teapots-backend.herokuapp.com/room/book",reqbody)
     .then((response)=>{
         if(response.data.success){
           alert(response.data.message)

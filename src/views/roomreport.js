@@ -22,7 +22,7 @@ export default class RoomReport extends Component{
     }
 
     getRoomDetails(){
-        axios.get("http://localhost:4000/room/getroomdetails")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/room/getroomdetails")
     .then((response)=>{
       this.setState({ roomdetails:response.data.message})
     })
@@ -34,7 +34,7 @@ export default class RoomReport extends Component{
             alert("No Guests in the selected room")
             this.setState({ guestdetails:[]})
        }else{
-        axios.get("http://localhost:4000/room/getguestdetails/"+roomid+"/"+date+"/"+name+"")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/room/getguestdetails/"+roomid+"/"+date+"/"+name+"")
         .then((response)=>{
           this.setState({ guestdetails:response.data.message})
           console.log(response.data.message)
@@ -51,7 +51,7 @@ export default class RoomReport extends Component{
         if(this.checkEmpty(date,name)){
             alert("No Guests in the selected room")
         }else{
-        axios.post("http://localhost:4000/room/vacate/"+roomid+"/"+date+"/"+name+"")
+        axios.post("https://hari-mad-teapots-backend.herokuapp.com/room/vacate/"+roomid+"/"+date+"/"+name+"")
         .then((response)=>{
          if(response.data.success){
             alert(response.data.message)

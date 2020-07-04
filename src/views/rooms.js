@@ -32,7 +32,7 @@ export default class Rooms extends Component{
     }
 
     getSingleRooms(){
-        axios.get("http://localhost:4000/room/getallroomsontype/Single")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/room/getallroomsontype/Single")
         .then((response)=>{
         if(response.data.success){
             this.setState({ singlerooms:response.data.message})
@@ -44,7 +44,7 @@ export default class Rooms extends Component{
     }
 
     getTwinRooms(){
-        axios.get("http://localhost:4000/room/getallroomsontype/Twin")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/room/getallroomsontype/Twin")
         .then((response)=>{
         if(response.data.success){
             this.setState({ twinorooms:response.data.message})
@@ -57,7 +57,7 @@ export default class Rooms extends Component{
     }
 
     getTrioRooms(){
-        axios.get("http://localhost:4000/room/getallroomsontype/Trio")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/room/getallroomsontype/Trio")
         .then((response)=>{
         if(response.data.success){
             this.setState({ triorooms:response.data.message})
@@ -70,7 +70,7 @@ export default class Rooms extends Component{
     }
 
     getQuadRooms(){
-        axios.get("http://localhost:4000/room/getallroomsontype/Quad")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/room/getallroomsontype/Quad")
         .then((response)=>{
         if(response.data.success){
             this.setState({ quadrooms:response.data.message})
@@ -85,7 +85,7 @@ export default class Rooms extends Component{
         if(date === '' || name ==='' || type ===''){
             alert("No Guests in the selected room")
         }else{
-        axios.post("http://localhost:4000/room/vacate/"+roomid+"/"+date+"/"+name+"")
+        axios.post("https://hari-mad-teapots-backend.herokuapp.com/room/vacate/"+roomid+"/"+date+"/"+name+"")
         .then((response)=>{
          if(response.data.success){ 
             alert(response.data.message)
@@ -107,7 +107,7 @@ export default class Rooms extends Component{
              alert("No Guests in the selected room")
              window.location.reload(false)
         }else{
-         axios.get("http://localhost:4000/room/getguestdetails/"+roomid+"/"+date+"/"+name+"")
+         axios.get("https://hari-mad-teapots-backend.herokuapp.com/room/getguestdetails/"+roomid+"/"+date+"/"+name+"")
          .then((response)=>{
              this.setState({ displayModal:true})
              this.setState({ guestdetails:response.data.message})

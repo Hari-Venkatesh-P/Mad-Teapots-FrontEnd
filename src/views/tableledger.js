@@ -19,7 +19,7 @@ export default class TableLedger extends Component{
     }
 
     getTableLedgerDetails(){
-        axios.get("http://localhost:4000/receipe/getallbillledgers")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/receipe/getallbillledgers")
         .then((response)=>{
         this.setState({ tableledgerdetails:response.data.message})
         })
@@ -27,7 +27,7 @@ export default class TableLedger extends Component{
     }
 
     getTableLedgerDetailsById(id){
-        axios.get("http://localhost:4000/receipe/getbillledgerbyid/"+id+"")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/receipe/getbillledgerbyid/"+id+"")
         .then((response)=>{
         this.setState({ tableorderitems:response.data.message.orderItems})
         })

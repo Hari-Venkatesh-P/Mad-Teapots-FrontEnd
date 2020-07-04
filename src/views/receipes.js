@@ -68,7 +68,7 @@ export default class Receipe extends Component{
                 receipeOfferQuantity : this.state.receipeOfferQuantity,
                 receipePrice : this.state.receipePrice,
             }
-            axios.post("http://localhost:4000/receipe/addreceipe",reqbody)
+            axios.post("https://hari-mad-teapots-backend.herokuapp.com/receipe/addreceipe",reqbody)
             .then((response)=>{
                 if(response.data.success){
                     alert(response.data.message)
@@ -84,7 +84,7 @@ export default class Receipe extends Component{
     
 
     getAllReceipes(){
-        axios.get("http://localhost:4000/receipe/getallreceipe")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/receipe/getallreceipe")
         .then((response)=>{
             if(response.data.success){
                 this.setState({ receipedetails:response.data.message})
@@ -103,7 +103,7 @@ export default class Receipe extends Component{
                     const reqbody = {
                         _id : id,
                     }
-                    axios.post("http://localhost:4000/receipe/deletereceipebyid",reqbody)
+                    axios.post("https://hari-mad-teapots-backend.herokuapp.com/receipe/deletereceipebyid",reqbody)
                     .then((response)=>{
                     if(response.data.success){
                         alert(response.data.message)
@@ -124,7 +124,7 @@ export default class Receipe extends Component{
                 if(id==null){
                     console.log("Receipe Id is null")
                 }else{
-                    axios.get("http://localhost:4000/receipe/getreceipebyid/"+id+"")
+                    axios.get("https://hari-mad-teapots-backend.herokuapp.com/receipe/getreceipebyid/"+id+"")
                     .then((response)=>{
                     if(response.data.success){
                         this.setState({
@@ -153,7 +153,7 @@ export default class Receipe extends Component{
                 const reqbody = {
                     _id : id,
                 }
-                axios.post("http://localhost:4000/receipe/receipeavailablitytoggle",reqbody)
+                axios.post("https://hari-mad-teapots-backend.herokuapp.com/receipe/receipeavailablitytoggle",reqbody)
                 .then((response)=>{
                 if(response.data.success){
                     alert(response.data.message)

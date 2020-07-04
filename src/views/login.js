@@ -72,7 +72,7 @@ export default class LoginPage extends Component{
                 class : this.state.class,
               }
               console.log(reqbody)
-              axios.post("http://localhost:4000/receipe/registerguest",reqbody)
+              axios.post("https://hari-mad-teapots-backend.herokuapp.com/receipe/registerguest",reqbody)
               .then((response)=>{
                   if(response.data.success){
                     alert(response.data.message)
@@ -94,7 +94,7 @@ export default class LoginPage extends Component{
         return(
             <div>
                 <nav className="navbar navbar-dark bg-dark">
-                    <a className="navbar-brand">Mad Teapots</a>
+                    <a className="navbar-brand" href="/">Mad Teapots</a>
                     <form className="form-inline">
                         <input className="form-control mr-sm-2" type="text"  value={this.state.name} onChange={this.onChangeName}   placeholder="Username" aria-label="text"></input>
                         <input className="form-control mr-sm-2" type="password"  value={this.state.password} onChange={this.onChangePassword}  placeholder="Password" aria-label="password"></input>

@@ -30,7 +30,7 @@ export default class Orders extends Component{
         if(_id === ''){
             alert("Unable to fetch current orderDetails")
         }else{
-            axios.get("http://localhost:4000/receipe/gettablebyid/"+_id+"")
+            axios.get("https://hari-mad-teapots-backend.herokuapp.com/receipe/gettablebyid/"+_id+"")
             .then((response)=>{
             if(response.data.success){
                 this.setState({

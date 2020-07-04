@@ -14,7 +14,7 @@ export default class RoomLedger extends Component{
     }
 
     componentDidMount(){
-    axios.get("http://localhost:4000/room/getroomledgerdetails")
+    axios.get("https://hari-mad-teapots-backend.herokuapp.com/room/getroomledgerdetails")
     .then((response)=>{
       this.setState({ roomledgerdetails:response.data.message})
     })

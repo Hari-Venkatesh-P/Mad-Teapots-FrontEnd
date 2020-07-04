@@ -34,21 +34,21 @@ export const GuestProtectedRoute = ({ component: Component, ...rest }) => {
     );
 }
 
-export const CookProtectedRoute = ({ component: Component, ...rest }) => {
-    return (
-        <Route
-            {...rest}
-            render={props => {
-                if (isCookAuthenticated()) {
-                    return <Component {...props} />
-                } else {
-                    return <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+// export const CookProtectedRoute = ({ component: Component, ...rest }) => {
+//     return (
+//         <Route
+//             {...rest}
+//             render={props => {
+//                 if (isCookAuthenticated()) {
+//                     return <Component {...props} />
+//                 } else {
+//                     return <Redirect to={{ pathname: '/', state: { from: props.location } }} />
 
-                }
-            }}
-        />
-    );
-}
+//                 }
+//             }}
+//         />
+//     );
+// }
 
 
 export const AdminAndCookSharedProtectedRoute = ({ component: Component, ...rest }) => {

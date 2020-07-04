@@ -1,5 +1,4 @@
 import React, { Component }  from 'react';
-import './App.css';
 import { BrowserRouter, Route   } from 'react-router-dom';
 
 
@@ -13,7 +12,7 @@ import LoginPage from '../src/views/login';
 import Orders from "../src/views/orders";
 import Tables from "./views/table";
 import TableLedger from "./views/tableledger";
-import { AdminProtectedRoute, GuestProtectedRoute, CookProtectedRoute , AdminAndCookSharedProtectedRoute } from '../src/authentication/protectedroute'
+import { AdminProtectedRoute, GuestProtectedRoute , AdminAndCookSharedProtectedRoute } from '../src/authentication/protectedroute'
 
 
 class App extends Component {

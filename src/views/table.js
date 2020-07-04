@@ -20,7 +20,7 @@ export default class Tables extends Component{
     }
 
     getTableDetails(){
-        axios.get("http://localhost:4000/receipe/getalltables")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/receipe/getalltables")
         .then((response)=>{
         this.setState({ tabledetails:response.data.message})
         })
@@ -28,7 +28,7 @@ export default class Tables extends Component{
     }
 
     getTableReceipeDetails(id){
-        axios.get("http://localhost:4000/receipe/gettablebyid/"+id+"")
+        axios.get("https://hari-mad-teapots-backend.herokuapp.com/receipe/gettablebyid/"+id+"")
         .then((response)=>{
         this.setState({ tableOrderItems:response.data.message.orderItems})
         console.log(this.state.tableOrderItems);
@@ -44,7 +44,7 @@ export default class Tables extends Component{
             const reqbody = {
                 _id : id
             }
-        axios.post("http://localhost:4000/receipe/paybill",reqbody)
+        axios.post("https://hari-mad-teapots-backend.herokuapp.com/receipe/paybill",reqbody)
         .then((response)=>{
          if(response.data.success){
             alert(response.data.message)
